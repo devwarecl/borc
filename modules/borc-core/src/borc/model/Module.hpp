@@ -11,7 +11,6 @@
 
 namespace borc {
     class Package;
-    class Source;
     class Module {
     public:
         struct Type {
@@ -38,7 +37,7 @@ namespace borc {
     public:
         explicit Module(Package *package);
 
-        ~Module();
+        virtual ~Module() = 0;
 
         std::string getName() const {
             return name;
@@ -52,10 +51,6 @@ namespace borc {
             return language;
         }
 
-        boost::filesystem::path getPath() const {
-            return path;
-        }
-
         const Package* getPackage() const {
             return package;
         }
@@ -64,54 +59,27 @@ namespace borc {
             return version;
         }
 
-        std::vector<const Module*> getDependencies() const {
-            return dependencies;
-        }
-
-        std::vector<boost::filesystem::path> getSourcePaths() const {
-            return sourcePaths;
-        }
-
-        std::vector<boost::filesystem::path> getIncludePaths() const {
-            return includePaths;
-        }
-
         void setName(const std::string &name);
 
         void setLanguage(const Language &lang);
-
-        void setPath(const boost::filesystem::path &path);
 
         void setType(const Type type);
 
         void setVersion(const Version &version);
 
-        void setSourcePaths(const std::vector<boost::filesystem::path> &sourcePaths);
-
-        void setIncludePaths(const std::vector<boost::filesystem::path> &includePaths);
-
-        /**
-         * @brief Reconstruct all the internal object Source files based on the supplied base folder
-         */
-        void rescanSources(const boost::filesystem::path &baseFolder);
-
-        std::vector<Source*> getSources() const;
+        std::vector<const Module*> getDependencies() const {
+            return dependencies;
+        }
 
         void setDependencies(const std::vector<const Module*> &dependentModules);
 
-    private:
+    protected:
         Package *package = nullptr;
         std::string name;
-        boost::filesystem::path path;
         Type type;
         Version version;
         Language language;
         std::vector<const Module*> dependencies;
-
-        std::vector<boost::filesystem::path> sourcePaths;
-        std::vector<boost::filesystem::path> includePaths;
-
-        std::vector<std::unique_ptr<Source>> sources;
     };
 }
 

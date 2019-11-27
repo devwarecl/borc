@@ -22,9 +22,6 @@ set (src_borc_common
 )
 
 set (src_borc_model
-    "src/borc/model/Version.hpp"
-    "src/borc/model/Source.hpp"
-    "src/borc/model/Module.hpp"
     "src/borc/model/ModuleLinkerMatcher.hpp"
     "src/borc/model/SourceCompilerMatcher.hpp"
     "src/borc/model/BuildPipeline.hpp"
@@ -37,9 +34,16 @@ set (src_borc_model
     "src/borc/model/ModuleLinkerMatcher.cpp"
     "src/borc/model/SourceCompilerMatcher.cpp"
     "src/borc/model/BuildPipeline.cpp"
+    "src/borc/model/Version.hpp"
     "src/borc/model/Version.cpp"
+    "src/borc/model/Source.hpp"
     "src/borc/model/Source.cpp"
+    "src/borc/model/Module.hpp"
     "src/borc/model/Module.cpp"
+    "src/borc/model/SourceModule.hpp"
+    "src/borc/model/SourceModule.cpp"
+    "src/borc/model/PrebuiltModule.hpp"
+    "src/borc/model/PrebuiltModule.cpp"
     "src/borc/model/Command.cpp"
     "src/borc/model/CommandFactory.cpp"
 )

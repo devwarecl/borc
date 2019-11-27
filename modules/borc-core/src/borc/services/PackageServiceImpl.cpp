@@ -6,7 +6,8 @@
 #include <boost/filesystem.hpp>
 #include <borc/model/Package.hpp>
 #include <borc/model/PackageRegistry.hpp>
-#include <borc/model/Module.hpp>
+#include <borc/model/SourceModule.hpp>
+#include <borc/model/PrebuiltModule.hpp>
 #include <borc/model/Package.hpp>
 #include <borc/parsing/JSONDeserializer.hpp>
 #include <borc/services/FileServiceImpl.hpp>
@@ -49,7 +50,7 @@ namespace borc {
             auto package = std::make_unique<Package>(packageEntity.name);
 
             for (const auto modulePackage : packageEntity.modules) {
-                auto module = package->createModule<Module>();
+                auto module = package->createModule<SourceModule>();
 
                 module->setName(modulePackage.name);
                 /*
@@ -79,7 +80,7 @@ namespace borc {
         for (int i=0; i<moduleEntities.size(); i++) {
             const ModuleEntity &moduleEntity = moduleEntities[i];
 
-            auto module = package->createModule<Module>();
+            auto module = package->createModule<SourceModule>();
 
             module->setName(moduleEntity.name);
 
